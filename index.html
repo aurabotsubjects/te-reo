@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Te Reo Māori Warm-Up · Term 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+a.te-aka-link{color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px;cursor:pointer}
+a.te-aka-link:hover{opacity:.8}
+a.te-aka-link::after{content:" 🔊";font-size:.85em;text-decoration:none}
+
+:root{
+  --bg:#0d0b14;
+  --bg-card:#13101e;
+  --bg-surface:#1a1628;
+  --border:rgba(255,255,255,0.08);
+  --border-hi:rgba(255,255,255,0.18);
+  --text:#f0eeff;
+  --text-muted:rgba(240,238,255,0.45);
+  --text-dim:rgba(240,238,255,0.25);
+  --mon:#e63946;
+  --tue:#f4a261;
+  --wed:#2ec4b6;
+  --thu:#a855f7;
+  --fri:#facc15;
+  --i-do:#3b82f6;
+  --we-do:#10b981;
+  --you-do:#f97316;
+  --font-display:'Bebas Neue','Impact',sans-serif;
+  --font-body:'Space Grotesk','DM Sans',system-ui,sans-serif;
+  --r-sm:4px;--r-md:8px;--r-lg:12px;
+  --shadow-card:0 4px 24px rgba(0,0,0,0.5);
+}
+
+html{font-size:18px;-webkit-font-smoothing:antialiased}
+body{
+  font-family:var(--font-body);
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+  min-height:100vh;
+  background-image:
+    radial-gradient(ellipse 70% 55% at 30% 20%,rgba(139,92,246,.12) 0%,transparent 70%),
+    radial-gradient(ellipse 50% 40% at 80% 80%,rgba(59,130,246,.08) 0%,transparent 60%);
+  background-attachment:fixed;
+}
+
+/* ── Header ── */
+.site-header{
+  background:rgba(13,11,20,.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:1.1rem 2rem;
+  display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;
+  position:sticky;top:0;z-index:100;
+}
+.site-header::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,
+    var(--mon) 0%,var(--mon) 20%,
+    var(--tue) 20%,var(--tue) 40%,
+    var(--wed) 40%,var(--wed) 60%,
+    var(--thu) 60%,var(--thu) 80%,
+    var(--fri) 80%,var(--fri) 100%);
+}
+.wordmark{font-family:var(--font-display);font-size:2rem;letter-spacing:.04em;line-height:1}
+.wordmark span{color:var(--thu)}
+.header-sub{margin-left:auto;font-size:.72rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted)}
+
+/* ── Selector bar ── */
+.selector-bar{
+  background:var(--bg-card);border-bottom:1px solid var(--border);
+  padding:1rem 2rem;display:flex;align-items:flex-end;gap:1.5rem;flex-wrap:wrap;
+}
+.sel-group{display:flex;flex-direction:column;gap:4px}
+.sel-group label{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted)}
+.sel-group select{
+  font-family:var(--font-body);font-size:1rem;font-weight:500;
+  padding:.4rem 2.2rem .4rem .75rem;
+  border:1px solid var(--border-hi);border-radius:var(--r-sm);
+  background:var(--bg-surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='rgba(240,238,255,0.45)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right .65rem center;
+  -webkit-appearance:none;appearance:none;cursor:pointer;color:var(--text);
+}
+.go-btn{
+  padding:.5rem 1.8rem;border:none;border-radius:var(--r-sm);
+  background:var(--text);color:var(--bg);
+  font-family:var(--font-body);font-size:.82rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  cursor:pointer;transition:background .15s,transform .1s,box-shadow .15s;
+}
+.go-btn:hover{background:var(--thu);color:#fff;transform:translateY(-1px);box-shadow:0 4px 16px rgba(168,85,247,.35)}
+.go-btn:active{transform:translateY(0)}
+
+/* ── Main ── */
+.main-content{flex:1;padding:2.5rem 2rem;max-width:920px;margin:0 auto;width:100%}
+
+/* ── Welcome ── */
+.welcome{padding:3rem 0}
+.welcome h1{font-family:var(--font-display);font-size:clamp(4rem,12vw,8rem);line-height:.92;letter-spacing:.02em;margin-bottom:1.5rem}
+.welcome h1 em{font-style:normal;color:var(--thu)}
+.welcome-sub{font-size:1.15rem;color:var(--text-muted);max-width:480px;margin-bottom:3rem}
+.welcome-sub strong{color:var(--text);text-decoration:underline;text-decoration-color:var(--thu);text-underline-offset:3px}
+.day-legend{display:flex;flex-wrap:wrap;gap:2rem;margin-bottom:3rem}
+.day-legend-item .dot-label{display:flex;align-items:center;gap:8px}
+.dot{width:10px;height:10px;border-radius:50%}
+.day-name{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.day-focus{font-size:.72rem;color:var(--text-muted);padding-left:18px}
+.stage-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;max-width:600px}
+.stage-card-sm{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-md);padding:1.25rem}
+.stage-card-sm .icon{font-size:1.5rem;margin-bottom:.5rem}
+.stage-card-sm .stitle{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.25rem}
+.stage-card-sm .sdesc{font-size:.78rem;color:var(--text-muted);line-height:1.4}
+
+/* ── Lesson header ── */
+.lesson-header{margin-bottom:2rem}
+.lesson-meta{display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem;flex-wrap:wrap}
+.badge{display:inline-flex;align-items:center;gap:5px;padding:.18rem .65rem;border-radius:3px;font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--bg)}
+.badge-muted{background:var(--border-hi)!important;color:var(--text)!important}
+.term-week{font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted)}
+.lesson-topic{font-family:var(--font-display);font-size:clamp(2.5rem,6vw,4rem);line-height:.95;letter-spacing:.02em;margin-bottom:.5rem}
+.nz-link{font-size:.78rem;color:var(--text-muted);display:flex;align-items:center;gap:6px}
+.ao-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:.6rem}
+.ao-tag{display:inline-flex;align-items:center;gap:5px;padding:.2rem .7rem;border-radius:20px;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:1px solid;cursor:pointer;transition:opacity .15s}
+.ao-tag:hover{opacity:.75}
+.ao-panel{background:var(--bg-surface);border:1px solid var(--border-hi);border-radius:var(--r-md);padding:1rem 1.25rem;margin:.75rem 0 1.25rem;font-size:.9rem;line-height:1.6;color:var(--text-muted);display:none}
+.ao-panel.open{display:block}
+.ao-panel strong{color:var(--text)}
+
+/* ── Stage progress ── */
+.stage-progress{display:flex;gap:.5rem;margin-bottom:1.5rem}
+.stage-step{
+  flex:1;display:flex;align-items:center;gap:.6rem;padding:.65rem 1rem;
+  border-radius:var(--r-sm);cursor:pointer;border:1px solid var(--border);
+  background:var(--bg-card);transition:border-color .15s,background .15s;text-align:left;
+}
+.stage-step:hover:not(.active){border-color:var(--border-hi);background:var(--bg-surface)}
+.stage-step.active{border-color:currentColor;background:var(--bg-surface)}
+.stage-step.done{opacity:.5}
+.step-icon{font-size:1.1rem;flex-shrink:0}
+.step-label{font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.step-sub{font-size:.62rem;color:var(--text-muted);display:block;line-height:1.3}
+
+/* ── Stage card ── */
+.stage-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;margin-bottom:1.25rem;box-shadow:var(--shadow-card)}
+.sc-header{padding:1.25rem 1.5rem;display:flex;align-items:center;gap:1rem;border-bottom:1px solid var(--border)}
+.sc-header-icon{font-size:1.6rem;line-height:1;flex-shrink:0}
+.sc-header-text h2{font-family:var(--font-display);font-size:1.5rem;font-weight:400;letter-spacing:.04em;line-height:1}
+.sc-header-text p{font-size:.68rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-top:3px}
+.sc-body{padding:1.5rem}
+
+/* ── Timer ── */
+.timer{display:flex;align-items:center;gap:8px;font-size:.8rem;font-weight:600;letter-spacing:.06em;color:var(--text-muted);margin-left:auto;font-variant-numeric:tabular-nums}
+.timer-bar{width:64px;height:3px;background:var(--border-hi);border-radius:2px;overflow:hidden}
+.timer-fill{height:100%;border-radius:2px;transition:width 1s linear}
+
+/* ── Content blocks ── */
+.instruction{font-size:1.15rem;color:var(--text);margin-bottom:1.25rem;line-height:1.7}
+.example-box{
+  background:var(--bg-surface);border-left:3px solid currentColor;border-radius:0 var(--r-sm) var(--r-sm) 0;
+  padding:1rem 1.25rem;margin-bottom:1.25rem;font-size:1.15rem;line-height:1.7;
+  color:var(--text);cursor:pointer;transition:border-color .15s,box-shadow .15s;position:relative;
+}
+.example-box:hover{box-shadow:0 0 0 1px rgba(255,255,255,.06)}
+.box-label{font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.5rem;color:var(--text-muted)}
+.fs-hint{position:absolute;top:.4rem;right:.5rem;font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:inherit;background:var(--bg);border:1px solid rgba(255,255,255,.1);border-radius:3px;padding:2px 6px;opacity:0;transition:opacity .15s;pointer-events:none}
+.example-box:hover .fs-hint{opacity:1}
+
+.demo-box{
+  background:var(--bg-surface);border:1px solid var(--border-hi);border-radius:var(--r-md);
+  padding:1rem 1.25rem;margin-bottom:1.25rem;font-size:1rem;line-height:1.7;
+  color:var(--text-muted);cursor:pointer;position:relative;transition:border-color .15s;
+}
+.demo-box:hover{border-color:rgba(255,255,255,.28)}
+.demo-box:hover .fs-hint{opacity:1}
+
+.tip-box{
+  display:flex;gap:1rem;align-items:flex-start;
+  background:rgba(250,204,21,.07);border:1px solid rgba(250,204,21,.25);
+  border-radius:var(--r-md);padding:1rem 1.25rem;margin-bottom:1.25rem;
+  font-size:1rem;line-height:1.55;
+}
+.tip-icon{font-size:1.1rem;flex-shrink:0;margin-top:2px}
+
+.prompt-box{
+  background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.25);
+  border-radius:var(--r-md);padding:1rem 1.25rem;margin-bottom:1.25rem;
+  font-size:1rem;line-height:1.55;display:flex;gap:.75rem;align-items:flex-start;
+}
+.prompt-icon{font-size:1rem;flex-shrink:0;margin-top:2px}
+
+.maori-phrase{
+  display:inline-block;font-size:1.35rem;font-weight:600;color:var(--wed);
+  background:rgba(46,196,182,.1);border-radius:var(--r-sm);padding:.1rem .5rem;
+  border:1px solid rgba(46,196,182,.25);letter-spacing:.01em;
+}
+.kupu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.6rem;margin-bottom:1.25rem}
+.kupu-card{
+  background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--r-sm);
+  padding:.7rem 1rem;display:flex;flex-direction:column;gap:2px;
+}
+.kupu-maori{font-size:1.15rem;font-weight:600;color:var(--wed)}
+.kupu-eng{font-size:.85rem;color:var(--text-muted)}
+
+.sentence-list{list-style:none;display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.25rem}
+.sentence-list li{
+  background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--r-sm);
+  padding:.6rem 1rem;font-size:1.15rem;line-height:1.55;
+  display:flex;gap:.75rem;align-items:flex-start;cursor:pointer;position:relative;
+  transition:border-color .15s;
+}
+.sentence-list li:hover{border-color:var(--border-hi)}
+.sentence-list li::before{content:'→';color:var(--text-dim);flex-shrink:0;font-size:.85em;margin-top:2px}
+
+.task-list{list-style:none;display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.25rem}
+.task-list li{
+  background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--r-sm);
+  padding:.75rem 1rem;font-size:1.15rem;line-height:1.55;
+  display:flex;gap:1rem;align-items:flex-start;transition:border-color .15s;
+}
+.task-list li:hover{border-color:var(--border-hi)}
+.task-list li.bonus{border-style:dashed;border-color:var(--fri);background:rgba(250,204,21,.05)}
+.task-num{width:20px;height:20px;border-radius:50%;background:var(--border-hi);font-size:.68rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+
+/* ── Stage nav ── */
+.stage-nav{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.nav-btn{
+  padding:.55rem 1.5rem;border-radius:var(--r-sm);border:none;
+  font-family:var(--font-body);font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  cursor:pointer;display:flex;align-items:center;gap:6px;transition:background .15s,transform .1s,box-shadow .15s;
+}
+.nav-btn:hover{transform:translateY(-1px)}
+.nav-btn:active{transform:translateY(0)}
+.nav-prev{background:transparent;color:var(--text-muted);border:1px solid var(--border-hi)}
+.nav-prev:hover{color:var(--text);border-color:var(--text-muted)}
+.nav-next{background:var(--text);color:var(--bg)}
+.nav-next:hover{box-shadow:0 4px 20px rgba(240,238,255,.25)}
+.nav-complete{background:var(--we-do);color:#fff}
+.nav-complete:hover{box-shadow:0 4px 20px rgba(16,185,129,.35)}
+.stage-counter{font-size:.75rem;color:var(--text-muted);letter-spacing:.06em}
+
+/* ── Complete screen ── */
+.complete-screen{text-align:center;padding:4rem 2rem}
+.complete-screen .big-icon{font-size:3.5rem;margin-bottom:1rem;display:block}
+.complete-screen h2{font-family:var(--font-display);font-size:3.5rem;font-weight:400;letter-spacing:.04em;margin-bottom:1rem}
+.complete-screen p{font-size:1.25rem;color:var(--text-muted);max-width:400px;margin:0 auto 1.5rem}
+.restart-btn{
+  display:inline-flex;align-items:center;gap:8px;padding:.6rem 1.8rem;
+  border:1px solid var(--border-hi);border-radius:var(--r-sm);background:transparent;color:var(--text);
+  font-family:var(--font-body);font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  cursor:pointer;transition:background .15s,border-color .15s;
+}
+.restart-btn:hover{background:var(--bg-surface);border-color:var(--text-muted)}
+
+/* ── Fullscreen overlay ── */
+.fs-overlay{
+  position:fixed;inset:0;z-index:9999;background:#0a0812;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:3rem 4rem;cursor:pointer;animation:fsIn 200ms ease;
+}
+@keyframes fsIn{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:scale(1)}}
+.fs-glow{position:absolute;width:70%;height:50%;background:radial-gradient(ellipse,rgba(46,196,182,.12) 0%,transparent 70%);pointer-events:none}
+.fs-label{font-size:.8rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:2rem;opacity:.85;flex-shrink:0}
+.fs-text{font-size:clamp(1.5rem,3.5vw,3rem);font-weight:600;color:#f0eeff;line-height:1.55;text-align:center;width:100%;max-width:1400px;position:relative;z-index:1;overflow-y:auto;max-height:calc(100vh - 12rem);padding:0 1rem}
+.fs-dismiss{position:absolute;bottom:2rem;right:2.5rem;font-size:.72rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,238,255,.25);display:flex;align-items:center;gap:.5rem}
+.fs-key{border:1px solid rgba(240,238,255,.2);border-radius:4px;padding:2px 6px;font-size:.65rem}
+.fs-bar{position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--mon) 0%,var(--mon) 20%,var(--tue) 20%,var(--tue) 40%,var(--wed) 40%,var(--wed) 60%,var(--thu) 60%,var(--thu) 80%,var(--fri) 80%,var(--fri) 100%)}
+
+/* ── Friday quiz ── */
+.quiz-intro{padding:2rem 0}
+.quiz-intro h2{font-family:var(--font-display);font-size:3rem;letter-spacing:.04em;margin-bottom:.5rem}
+.quiz-intro p{color:var(--text-muted);margin-bottom:2rem}
+.team-setup{display:flex;flex-direction:column;gap:1rem;max-width:400px}
+.team-input{
+  display:flex;gap:.75rem;align-items:center;
+}
+.team-label{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;width:80px;flex-shrink:0}
+.team-input input{
+  flex:1;background:var(--bg-surface);border:1px solid var(--border-hi);border-radius:var(--r-sm);
+  padding:.4rem .75rem;color:var(--text);font-family:var(--font-body);font-size:1rem;
+}
+.team-input input:focus{outline:none;border-color:var(--thu);box-shadow:0 0 0 3px rgba(168,85,247,.2)}
+.start-quiz-btn{
+  margin-top:1rem;padding:.65rem 2rem;border:none;border-radius:var(--r-sm);
+  background:var(--fri);color:#1a1200;font-family:var(--font-body);font-size:.85rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:transform .1s,box-shadow .15s;width:fit-content;
+}
+.start-quiz-btn:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(250,204,21,.35)}
+
+.quiz-q{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.5rem;margin-bottom:1.25rem;box-shadow:var(--shadow-card)}
+.quiz-progress{display:flex;align-items:center;gap:1rem;margin-bottom:1rem}
+.quiz-bar-wrap{flex:1;height:4px;background:var(--border-hi);border-radius:2px}
+.quiz-bar-fill{height:100%;border-radius:2px;background:var(--fri);transition:width .3s}
+.quiz-qnum{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted)}
+.quiz-day-tag{font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.15rem .5rem;border-radius:3px;color:var(--bg);margin-bottom:.75rem;display:inline-block}
+.quiz-question{font-size:1.25rem;color:var(--text);line-height:1.55;margin-bottom:1.25rem;font-weight:500}
+.quiz-options{display:flex;flex-direction:column;gap:.6rem}
+.quiz-option{
+  background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--r-sm);
+  padding:.75rem 1rem;font-size:1rem;cursor:pointer;display:flex;align-items:flex-start;gap:.75rem;
+  transition:border-color .15s,background .15s;text-align:left;font-family:var(--font-body);color:var(--text);
+}
+.quiz-option:hover:not(:disabled){border-color:var(--border-hi);background:rgba(255,255,255,.04)}
+.quiz-option.correct{border-color:#10b981;background:rgba(16,185,129,.12);color:var(--text)}
+.quiz-option.wrong{border-color:#e63946;background:rgba(230,57,70,.1);color:var(--text-muted)}
+.quiz-option:disabled{cursor:default}
+.opt-letter{width:22px;height:22px;border-radius:50%;background:var(--border-hi);font-size:.72rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.quiz-option.correct .opt-letter{background:#10b981;color:#fff}
+.quiz-option.wrong .opt-letter{background:#e63946;color:#fff}
+
+.scores{display:flex;gap:2rem;margin-bottom:1.5rem}
+.score-card{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--r-md);padding:.75rem 1.5rem;text-align:center;flex:1}
+.score-team{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted)}
+.score-num{font-family:var(--font-display);font-size:3rem;line-height:1;letter-spacing:.04em}
+.score-tag{font-size:.72rem;color:var(--text-muted)}
+.next-q-btn{
+  padding:.55rem 1.5rem;border:none;border-radius:var(--r-sm);
+  background:var(--fri);color:#1a1200;font-family:var(--font-body);font-size:.75rem;
+  font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;
+  transition:transform .1s,box-shadow .15s;
+}
+.next-q-btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(250,204,21,.3)}
+
+.winner-screen{text-align:center;padding:3rem 2rem}
+.winner-screen h2{font-family:var(--font-display);font-size:4rem;letter-spacing:.04em;color:var(--fri);margin-bottom:.5rem}
+.winner-screen .final-scores{display:flex;justify-content:center;gap:2rem;margin:2rem 0}
+.winner-screen .score-card{min-width:140px}
+.winner-card{border-color:var(--fri)!important;background:rgba(250,204,21,.07)!important}
+.writing-task{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.5rem;margin-top:1.5rem;text-align:left}
+.writing-task h3{font-family:var(--font-display);font-size:1.75rem;letter-spacing:.04em;margin-bottom:.75rem}
+.writing-prompt{font-size:1.15rem;line-height:1.65;margin-bottom:1rem}
+.checklist{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.checklist li{display:flex;align-items:flex-start;gap:.75rem;font-size:.95rem;color:var(--text-muted);line-height:1.4}
+.checklist li::before{content:'□';font-size:1rem;flex-shrink:0}
+
+/* ── Footer ── */
+.site-footer{text-align:center;padding:1.5rem;font-size:.68rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);border-top:1px solid var(--border);margin-top:2rem}
+
+/* ── Transitions ── */
+.fade{transition:opacity .4s ease,transform .4s ease}
+.fade-out{opacity:0;transform:translateY(-10px);pointer-events:none}
+.fade-in{opacity:1;transform:translateY(0)}
+
+@media(max-width:640px){
+  .site-header{padding:1rem}
+  .selector-bar{padding:.75rem 1rem;gap:1rem}
+  .main-content{padding:1.5rem 1rem}
+  .sc-body{padding:1rem}
+  .sc-header{padding:1rem}
+  .stage-progress{flex-direction:column}
+  .kupu-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wordmark">Te Reo <span>Wārm-Up.</span></div>
+  <div class="header-sub">NZ Years 5–6 · Term 1</div>
+</header>
+
+<div class="selector-bar">
+  <div class="sel-group">
+    <label>Term</label>
+    <select id="term-sel" onchange="onSelChange()"><option value="1">Term 1</option><option value="2">Term 2</option><option value="3">Term 3</option><option value="4">Term 4</option></select>
+  </div>
+  <div class="sel-group">
+    <label>Week</label>
+    <select id="week-sel" onchange="onSelChange()">
+      <option value="1">Week 1</option>
+      <option value="2">Week 2</option>
+      <option value="3">Week 3</option>
+      <option value="4">Week 4</option>
+      <option value="5">Week 5</option>
+      <option value="6">Week 6</option>
+      <option value="7">Week 7</option>
+      <option value="8">Week 8</option>
+      <option value="9">Week 9</option>
+      <option value="10">Week 10</option>
+    </select>
+  </div>
+  <div class="sel-group">
+    <label>Day</label>
+    <select id="day-sel" onchange="onSelChange()">
+      <option value="Monday">Monday</option>
+      <option value="Tuesday">Tuesday</option>
+      <option value="Wednesday">Wednesday</option>
+      <option value="Thursday">Thursday</option>
+      <option value="Friday">Friday</option>
+    </select>
+  </div>
+  <button class="go-btn" onclick="loadLesson()">Go →</button>
+</div>
+
+<main class="main-content" id="main">
+  <div class="welcome" id="welcome-screen">
+    <h1>TĀUA<br>KŌRERO.<em>.</em></h1>
+    <p class="welcome-sub">A daily 20-minute te reo Māori warm-up — no memorising, just building.</p>
+    <div class="day-legend">
+      <div class="day-legend-item"><div class="dot-label"><div class="dot" style="background:var(--mon)"></div><span class="day-name">Monday</span></div><div class="day-focus">Kupu hou — new vocabulary</div></div>
+      <div class="day-legend-item"><div class="dot-label"><div class="dot" style="background:var(--tue)"></div><span class="day-name">Tuesday</span></div><div class="day-focus">Hanganga — grammar structure</div></div>
+      <div class="day-legend-item"><div class="dot-label"><div class="dot" style="background:var(--wed)"></div><span class="day-name">Wednesday</span></div><div class="day-focus">Hanga rerenga — sentence building</div></div>
+      <div class="day-legend-item"><div class="dot-label"><div class="dot" style="background:var(--thu)"></div><span class="day-name">Thursday</span></div><div class="day-focus">Kōrero — conversation practice</div></div>
+      <div class="day-legend-item"><div class="dot-label"><div class="dot" style="background:var(--fri)"></div><span class="day-name">Friday</span></div><div class="day-focus">Aromatawai — quiz &amp; review</div></div>
+    </div>
+    <div class="stage-cards">
+      <div class="stage-card-sm"><div class="icon">👁️</div><div class="stitle">Tāua Kōrero</div><div class="sdesc">Watch &amp; discover. Teacher models the pattern — no notes needed.</div></div>
+      <div class="stage-card-sm"><div class="icon">🤝</div><div class="stitle">Kia Tūhono</div><div class="sdesc">Build together. Class constructs sentences with guided prompts.</div></div>
+      <div class="stage-card-sm"><div class="icon">✏️</div><div class="stitle">Māu Anō</div><div class="sdesc">Your turn. Independent sentence challenges, spoken or written.</div></div>
+    </div>
+  </div>
+  <div id="lesson-area" style="display:none"></div>
+</main>
+
+<footer class="site-footer">Te Reo Māori Warm-Up · NZ Curriculum Years 5–6 · <span style="font-size:0.7em;opacity:0.5;">Lesson design informed by the Michel Thomas approach to language acquisition.</span></footer>
+
+<!-- Fullscreen overlay -->
+<div class="fs-overlay" id="fs-overlay" style="display:none" onclick="closeFull()">
+  <div class="fs-glow"></div>
+  <div class="fs-label" id="fs-label"></div>
+  <div class="fs-text" id="fs-text" onclick="event.stopPropagation()"></div>
+  <div class="fs-dismiss"><span class="fs-key">ESC</span> or tap anywhere to close</div>
+  <div class="fs-bar"></div>
+</div>
+
+<script>
+// ── Data ───────────────────────────────────────────────────────────────────────
+const DAY_COLOURS = {Monday:'#e63946',Tuesday:'#f4a261',Wednesday:'#2ec4b6',Thursday:'#a855f7',Friday:'#facc15'}
+const DAY_EMOJIS  = {Monday:'🗣️',Tuesday:'📖',Wednesday:'✍️',Thursday:'💬',Friday:'🎮'}
+const DAY_FOCUS   = {Monday:'Kupu hou — New vocabulary',Tuesday:'Hanganga — Grammar structure',Wednesday:'Hanga rerenga — Sentence building',Thursday:'Kōrero — Conversation',Friday:'Aromatawai — Quiz & review'}
+
+const STAGES = [
+  {key:'iDo',  icon:'👁️',label:'Tāua Kōrero',sub:'Watch & listen',color:'#3b82f6',next:'Start Kia Tūhono',mins:6},
+  {key:'weDo', icon:'🤝',label:'Kia Tūhono', sub:'Build together', color:'#10b981',next:'Start Māu Anō',mins:8},
+  {key:'youDo',icon:'✏️',label:'Māu Anō',    sub:'Your turn',     color:'#f97316',next:'Finish lesson',mins:6},
+]
+// ── Term data loader ──────────────────────────────────────────
+function loadTermData(term) { return Promise.resolve() }
+
+function getCurrentCurriculum() {
+  const data = _getTermData()
+  return data ? data.curriculum : null
+}
+
+function getCurrentQuiz() {
+  const data = _getTermData()
+  return data ? data.quiz : null
+}
+
+function _getTermData() {
+  switch(currentTerm) {
+    case 1: return typeof getTerm1Data === 'function' ? getTerm1Data(currentWeek) : null
+    case 2: return typeof getTerm2Data === 'function' ? getTerm2Data(currentWeek) : null
+    case 3: return typeof getTerm3Data === 'function' ? getTerm3Data(currentWeek) : null
+    case 4: return typeof getTerm4Data === 'function' ? getTerm4Data(currentWeek) : null
+    default: return null
+  }
+}
+
+// ── Safe fullscreen store ────────────────────────────────────────────────────
+const _fsStore = {}
+function storeFull(label, html, col){
+  const id = 'fs_' + Math.random().toString(36).slice(2)
+  _fsStore[id] = {label, html, col}
+  return id
+}
+function openFullById(id){
+  const d = _fsStore[id]
+  if(d) openFull(null, d.label, d.html, d.col)
+}
+
+function toggleAO(i){
+  const p = document.getElementById('ao-panel-'+i)
+  if(p) p.classList.toggle('open')
+}
+
+
+function onTermChange(){}
+
+function populateWeeks(){} // weeks are hardcoded in HTML
+
+// Initialise week selector on page load
+
+
+
+// ── State ──────────────────────────────────────────────────────────────────────
+let currentDay   = null
+let currentTerm  = 1
+let currentWeek  = 1
+let currentStage = 0
+let stageDone    = false
+
+// Timers
+let timerInterval = null
+let timerRemaining = 0
+
+// Quiz state
+let quizPhase = 'intro'
+let quizQuestions = []
+let quizIdx = 0
+let quizScores = [0,0]
+let scoringTeam = 0
+let teamNames = ['Team 1','Team 2']
+let answered = false
+
+// ── Selectors ──────────────────────────────────────────────────────────────────
+function onSelChange(){}
+
+function loadLesson(){
+  const day  = document.getElementById('day-sel').value
+  currentDay  = day
+  currentTerm = parseInt(document.getElementById('term-sel').value) || 1
+  currentWeek = parseInt(document.getElementById('week-sel').value) || 1
+  document.getElementById('welcome-screen').style.display='none'
+  const area = document.getElementById('lesson-area')
+  area.style.display='block'
+  area.innerHTML = '<div style="padding:3rem 0;text-align:center;color:var(--text-muted);font-size:1rem">Loading…</div>'
+  loadTermData(currentTerm).then(() => {
+    const data = _getTermData()
+    if (!data || !data.curriculum) {
+      area.innerHTML = `<div style="padding:3rem 0;text-align:center;color:var(--text-muted);max-width:480px;margin:0 auto;line-height:1.6">
+  <div style="font-size:2rem;margin-bottom:1rem">🎉</div>
+  <div style="font-size:1.2rem;font-weight:600;color:var(--text);margin-bottom:.75rem">Ka mutu!</div>
+  <div>Term ${currentTerm} Week ${currentWeek} does not have dedicated content — the programme for this term is complete.</div>
+  <div style="margin-top:.75rem">For Term 4, the programme concludes at <strong>Week 6</strong> with the end-of-year assessment and whakaaturanga.</div>
+  <div style="margin-top:1.5rem"><button class="go-btn" onclick="document.getElementById('week-sel').value=6;loadLesson()">← Go to Week 6</button></div>
+</div>`
+      return
+    }
+    if(day==='Friday'){renderFriday(area);return}
+    const lesson = data.curriculum[day]
+    if(!lesson){
+      area.innerHTML = '<div style="padding:3rem 0;text-align:center;color:var(--text-muted)">This day&#39;s content is coming soon!</div>'
+      return
+    }
+    currentStage=0; stageDone=false
+    renderLesson(area, lesson, day)
+  }).catch(err => {
+    area.innerHTML = `<div style="padding:3rem 0;text-align:center;color:var(--color-error)">Could not load term data. Make sure term${currentTerm}-data.js is in the same folder.</div>`
+    console.error(err)
+  })
+}
+
+// ── Lesson renderer ────────────────────────────────────────────────────────────
+function renderLesson(area, lesson, day){
+  const col = DAY_COLOURS[day]
+  const focus = DAY_FOCUS[day]
+  const emoji = DAY_EMOJIS[day]
+
+  const aoTags = (lesson.aos||[]).map((ao,i)=>`
+    <button class="ao-tag" style="color:${col};border-color:${col}40;background:${col}12"
+      onclick="toggleAO(${i})">
+      📋 ${ao.code} — ${ao.label}
+    </button>`).join('')
+  const aoPanels = (lesson.aos||[]).map((ao,i)=>`
+    <div class="ao-panel" id="ao-panel-${i}">
+      <strong>${ao.code}: ${ao.label}</strong><br>
+      ${lesson.nzLink}
+    </div>`).join('')
+
+  area.innerHTML=`
+    <div class="lesson-header">
+      <div class="lesson-meta">
+        <span class="badge" style="background:${col}">${emoji} ${day}</span>
+        <span class="badge badge-muted">${focus}</span>
+        <span class="term-week">Term 1 · Week ${currentWeek}</span>
+      </div>
+      <h1 class="lesson-topic">${lesson.topic}</h1>
+      <p class="nz-link">🎓 <span><strong>NZ Curriculum:</strong> Te Aho Arataki Marau — Levels 1–2</span></p>
+      <div class="ao-tags">${aoTags}</div>
+      ${aoPanels}
+    </div>
+    <div id="stage-progress-wrap"></div>
+    <div id="stage-content-wrap"></div>
+    <div id="stage-nav-wrap"></div>
+  `
+  renderStageProgress(day, col)
+  renderStage(lesson, day)
+}
+
+function renderStageProgress(day, col){
+  const wrap = document.getElementById('stage-progress-wrap')
+  wrap.innerHTML = STAGES.map((s,i)=>`
+    <button class="stage-step ${i===currentStage?'active':''} ${i<currentStage?'done':''}"
+      style="color:${i===currentStage?s.color:'var(--text-muted)'}"
+      onclick="jumpStage(${i})">
+      <span class="step-icon">${i<currentStage?'✅':s.icon}</span>
+      <div>
+        <span class="step-label">${s.label}</span>
+        <span class="step-sub">${s.sub} · ~${s.mins} min</span>
+      </div>
+    </button>
+  `).join('')
+  // Wrap in flex div
+  wrap.innerHTML = `<div class="stage-progress">${wrap.innerHTML}</div>`
+}
+
+function renderStage(lesson, day){
+  const s = STAGES[currentStage]
+  const data = lesson[s.key]
+  const col = s.color
+  const dayCol = DAY_COLOURS[day]
+
+  let bodyHtml = ''
+  if(s.key==='iDo'){
+    const exId = data.example ? storeFull('Example', data.example, col) : null
+    const dmId = data.demo    ? storeFull('Demonstration', data.demo, col) : null
+    bodyHtml=`
+      <p class="instruction">${data.instruction}</p>
+      ${data.example?`<div class="example-box" style="color:${col};border-left-color:${col}" onclick="openFullById('${exId}')">
+        <div class="box-label">Example — click to enlarge</div>
+        <span style="color:var(--text)">${data.example}</span>
+        <span class="fs-hint" style="color:${col}">⛶ Full screen</span>
+      </div>`:''}
+      ${data.demo?`<div class="demo-box" onclick="openFullById('${dmId}')">
+        <div class="box-label">🎬 Demonstration — click to enlarge</div>
+        <span style="white-space:pre-line">${data.demo}</span>
+        <span class="fs-hint" style="color:${col}">⛶ Full screen</span>
+      </div>`:''}
+      ${data.tip?`<div class="tip-box"><span class="tip-icon">💡</span><span><strong>Teaching tip: </strong>${data.tip}</span></div>`:''}
+    `
+  } else if(s.key==='weDo'){
+    const sentIds = data.sentences.map(sent => storeFull('Sentence', sent, col))
+    bodyHtml=`
+      <p class="instruction">${data.instruction}</p>
+      <ul class="sentence-list">
+        ${data.sentences.map((sent,i)=>`<li onclick="openFullById('${sentIds[i]}')">${sent}</li>`).join('')}
+      </ul>
+      ${data.prompt?`<div class="prompt-box"><span class="prompt-icon">💬</span><span><strong>Discussion: </strong>${data.prompt}</span></div>`:''}
+    `
+  } else {
+    bodyHtml=`
+      <p class="instruction">${data.instruction}</p>
+      <ul class="task-list">
+        ${data.tasks.map((t,i)=>{
+          const isBonus=t.startsWith('✦')
+          return `<li class="${isBonus?'bonus':''}">
+            ${isBonus?'':'<span class="task-num">'+(i+1)+'</span>'}
+            <span>${t}</span>
+          </li>`
+        }).join('')}
+      </ul>
+    `
+  }
+
+  startTimer(s.mins)
+
+  document.getElementById('stage-content-wrap').innerHTML=`
+    <div class="stage-card">
+      <div class="sc-header" style="background:${col}18;border-left:3px solid ${col}">
+        <span class="sc-header-icon">${s.icon}</span>
+        <div class="sc-header-text">
+          <h2 style="color:${col}">${data.title}</h2>
+          <p>Stage ${currentStage+1} of 3 · approximately ${s.mins} minutes</p>
+        </div>
+        <div class="timer" id="stage-timer">
+          <span id="timer-text">${s.mins}:00</span>
+          <div class="timer-bar"><div class="timer-fill" id="timer-fill" style="width:100%;background:${col}"></div></div>
+        </div>
+      </div>
+      <div class="sc-body">${bodyHtml}</div>
+    </div>
+  `
+
+  // Nav
+  const lesson2 = getCurrentCurriculum()[currentDay]
+  let nextBtn = ''
+  if(currentStage<2){
+    const ns = STAGES[currentStage+1]
+    nextBtn=`<button class="nav-btn nav-next" style="background:${ns.color}" onclick="nextStage()">${s.next} →</button>`
+  } else {
+    nextBtn=`<button class="nav-btn nav-complete" onclick="completeLesson()">✓ Complete lesson</button>`
+  }
+  document.getElementById('stage-nav-wrap').innerHTML=`
+    <div class="stage-nav">
+      <button class="nav-btn nav-prev" onclick="prevStage()" ${currentStage===0?'disabled style="opacity:.3;cursor:not-allowed"':''}>← Back</button>
+      <span class="stage-counter">${currentStage+1} / 3</span>
+      ${nextBtn}
+    </div>
+  `
+}
+
+function jumpStage(i){
+  clearTimer()
+  currentStage=i
+  renderStageProgress(currentDay, DAY_COLOURS[currentDay])
+  renderStage(getCurrentCurriculum()[currentDay], currentDay)
+}
+function nextStage(){if(currentStage<2){currentStage++;jumpStage(currentStage)}}
+function prevStage(){if(currentStage>0){currentStage--;jumpStage(currentStage)}}
+
+function completeLesson(){
+  clearTimer()
+  document.getElementById('stage-content-wrap').innerHTML=`
+    <div class="complete-screen">
+      <span class="big-icon">🎉</span>
+      <h2>Ka pai!</h2>
+      <p>Āe! Lesson complete. Ka rawe tō mahi — your work is excellent.</p>
+      <button class="restart-btn" onclick="jumpStage(0)">↩ Restart lesson</button>
+    </div>
+  `
+  document.getElementById('stage-nav-wrap').innerHTML=''
+}
+
+// ── Timer ──────────────────────────────────────────────────────────────────────
+function startTimer(mins){
+  clearTimer()
+  timerRemaining = mins * 60
+  const total = timerRemaining
+  updateTimerDisplay(timerRemaining, total)
+  timerInterval = setInterval(()=>{
+    timerRemaining--
+    if(timerRemaining<0){timerRemaining=0;clearTimer()}
+    updateTimerDisplay(timerRemaining, total)
+  }, 1000)
+}
+function clearTimer(){clearInterval(timerInterval)}
+function updateTimerDisplay(rem, total){
+  const el = document.getElementById('timer-text')
+  const fill = document.getElementById('timer-fill')
+  if(!el) return
+  const m=Math.floor(rem/60), s=String(rem%60).padStart(2,'0')
+  el.textContent=`${m}:${s}`
+  const pct=Math.max(0,(rem/total)*100)
+  if(fill){
+    fill.style.width=pct+'%'
+    fill.style.background = pct>40 ? STAGES[currentStage]?.color||'#3b82f6' : pct>15 ? '#facc15' : '#e63946'
+  }
+}
+
+// ── Fullscreen overlay ─────────────────────────────────────────────────────────
+function openFull(el, label, html, col){
+  const ov = document.getElementById('fs-overlay')
+  document.getElementById('fs-label').style.color=col
+  document.getElementById('fs-label').textContent=label
+  const textEl = document.getElementById('fs-text')
+  textEl.innerHTML = html.replace(/\\n/g,'<br>').replace(/\n/g,'<br>')
+  ov.style.display='flex'
+  // Apply color to underlines in html
+  textEl.querySelectorAll('u').forEach(u=>{ u.style.color=col; u.style.textDecorationColor=col })
+}
+function closeFull(){document.getElementById('fs-overlay').style.display='none'}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeFull()})
+
+function escHtml(s){ return s.replace(/`/g,'\\`') }
+
+// ── Friday quiz ────────────────────────────────────────────────────────────────
+function renderFriday(area){
+  quizPhase='intro'
+  quizScores=[0,0]
+  quizIdx=0
+  answered=false
+  scoringTeam=0
+
+  area.innerHTML=`
+    <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--border)">
+      <span style="font-size:1.25rem">🎮</span>
+      <div>
+        <div style="font-family:var(--font-display);font-size:1.6rem;letter-spacing:.04em;color:var(--fri)">Friday Quiz</div>
+        <div style="font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted)">Term 1 · Week ${currentWeek} · Aromatawai</div>
+      </div>
+      <span class="badge" style="margin-left:auto;background:var(--fri);color:#1a1200">8 questions</span>
+    </div>
+    <div id="fri-content"></div>
+  `
+  renderFriIntro()
+}
+
+function toggleAO(i){
+  const p = document.getElementById('ao-panel-'+i)
+  if(p) p.classList.toggle('open')
+}
+
+function renderFriIntro(){
+  const el = document.getElementById('fri-content')
+  el.innerHTML=`
+    <div class="quiz-intro">
+      <h2>Kia tākaro!</h2>
+      <p>8 questions covering this week's four lessons. Work in two teams — alternate who answers. The teacher picks who responds.</p>
+      <div class="team-setup">
+        <div class="team-input"><span class="team-label" style="color:var(--mon)">Team 1</span><input id="t1" value="Team 1" placeholder="Team name"/></div>
+        <div class="team-input"><span class="team-label" style="color:var(--wed)">Team 2</span><input id="t2" value="Team 2" placeholder="Team name"/></div>
+        <button class="start-quiz-btn" onclick="startQuiz()">Start quiz →</button>
+      </div>
+    </div>
+  `
+}
+
+function shuffle(arr){ const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]};return a }
+
+function startQuiz(){
+  teamNames=[document.getElementById('t1').value||'Team 1', document.getElementById('t2').value||'Team 2']
+  quizIdx=0; quizScores=[0,0]; answered=false
+  // Shuffle options but track correct
+  quizQuestions = getCurrentQuiz().map(q=>{
+    const opts = q.options.map((o,i)=>({text:o,orig:i}))
+    const shuffled = shuffle(opts)
+    const newCorrect = shuffled.findIndex(o=>o.orig===q.correct)
+    return {...q, shuffledOpts:shuffled.map(o=>o.text), shuffledCorrect:newCorrect}
+  })
+  renderQuizQ()
+}
+
+function renderQuizQ(){
+  answered=false
+  const q=quizQuestions[quizIdx]
+  const team=scoringTeam
+  const teamCol = team===0?'var(--mon)':'var(--wed)'
+  const dayCol = DAY_COLOURS[q.day]||'var(--fri)'
+  const pct = (quizIdx/8)*100
+
+  const el = document.getElementById('fri-content')
+  el.innerHTML=`
+    <div class="scores">
+      <div class="score-card ${scoringTeam===0?'winner-card':''}">
+        <div class="score-team" style="color:var(--mon)">${teamNames[0]}</div>
+        <div class="score-num" style="color:var(--mon)">${quizScores[0]}</div>
+        <div class="score-tag">points</div>
+      </div>
+      <div class="score-card ${scoringTeam===1?'winner-card':''}">
+        <div class="score-team" style="color:var(--wed)">${teamNames[1]}</div>
+        <div class="score-num" style="color:var(--wed)">${quizScores[1]}</div>
+        <div class="score-tag">points</div>
+      </div>
+    </div>
+    <div class="quiz-q">
+      <div class="quiz-progress">
+        <span class="quiz-qnum">Question ${quizIdx+1} of 8</span>
+        <div class="quiz-bar-wrap"><div class="quiz-bar-fill" style="width:${pct}%"></div></div>
+        <span style="font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:${teamCol}">${teamNames[team]}'s turn</span>
+      </div>
+      <span class="quiz-day-tag" style="background:${dayCol}">${q.day}</span>
+      <p class="quiz-question">${q.q}</p>
+      <div class="quiz-options" id="quiz-opts">
+        ${q.shuffledOpts.map((opt,i)=>`
+          <button class="quiz-option" onclick="answerQ(${i})" id="opt-${i}">
+            <span class="opt-letter">${'ABCD'[i]}</span>
+            <span>${opt}</span>
+          </button>
+        `).join('')}
+      </div>
+      <div id="q-feedback" style="margin-top:.75rem;display:none"></div>
+      <div style="text-align:right;margin-top:1rem">
+        <button class="next-q-btn" id="next-q-btn" style="display:none" onclick="nextQ()">
+          ${quizIdx<7?'Next question →':'See results →'}
+        </button>
+      </div>
+    </div>
+  `
+}
+
+function answerQ(i){
+  if(answered)return
+  answered=true
+  const q=quizQuestions[quizIdx]
+  const correct=q.shuffledCorrect
+  const opts=document.querySelectorAll('.quiz-option')
+  opts.forEach(o=>o.disabled=true)
+  opts[i].classList.add(i===correct?'correct':'wrong')
+  if(i===correct){
+    opts[correct].classList.add('correct')
+    quizScores[scoringTeam]++
+    document.getElementById('q-feedback').innerHTML=`<div style="color:#10b981;font-weight:600;font-size:1rem">✓ Tino pai! +1 point for ${teamNames[scoringTeam]}</div>`
+  } else {
+    opts[correct].classList.add('correct')
+    document.getElementById('q-feedback').innerHTML=`<div style="color:#e63946;font-weight:600;font-size:1rem">✗ Not quite. The answer was: ${q.shuffledOpts[correct]}</div>`
+  }
+  document.getElementById('q-feedback').style.display='block'
+  document.getElementById('next-q-btn').style.display='inline-flex'
+  // Refresh score cards
+  document.querySelectorAll('.score-num')[0].textContent=quizScores[0]
+  document.querySelectorAll('.score-num')[1].textContent=quizScores[1]
+}
+
+function nextQ(){
+  scoringTeam = (scoringTeam+1)%2
+  quizIdx++
+  if(quizIdx>=8){renderWinner();return}
+  renderQuizQ()
+}
+
+function renderWinner(){
+  const winner = quizScores[0]>quizScores[1]?0:quizScores[1]>quizScores[0]?1:-1
+  const el = document.getElementById('fri-content')
+  el.innerHTML=`
+    <div class="winner-screen">
+      <div style="font-size:3rem;margin-bottom:.5rem">🏆</div>
+      <h2>${winner===-1?'He ōrite!':teamNames[winner]+' wins!'}</h2>
+      <p style="color:var(--text-muted);margin-bottom:.5rem">${winner===-1?'It\'s a draw — ka pai both teams!':'Tino pai — very well done!'}</p>
+      <div class="final-scores">
+        <div class="score-card ${winner===0?'winner-card':''}">
+          <div class="score-team" style="color:var(--mon)">${teamNames[0]}</div>
+          <div class="score-num" style="color:var(--mon)">${quizScores[0]}</div>
+          <div class="score-tag">/ 4 points</div>
+        </div>
+        <div class="score-card ${winner===1?'winner-card':''}">
+          <div class="score-team" style="color:var(--wed)">${teamNames[1]}</div>
+          <div class="score-num" style="color:var(--wed)">${quizScores[1]}</div>
+          <div class="score-tag">/ 4 points</div>
+        </div>
+      </div>
+      <div class="writing-task">
+        <h3>🗣️ Kōrero challenge</h3>
+        <p class="writing-prompt">With a partner, have a full conversation in te reo Māori. Use everything from this week: greetings, names, and Kei te sentences. Aim for at least 6 lines back and forth.</p>
+        <p style="font-size:.85rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);margin:1rem 0 .5rem">Check you can:</p>
+        <ul class="checklist">
+          <li>Greet your partner with <b>Kia ora</b> or <b>Tēnā koe</b></li>
+          <li>Introduce yourself: <b>Ko [name] tōku ingoa</b></li>
+          <li>Ask and answer: <b>Kei te pēhea koe?</b> — <b>Kei te pai au</b></li>
+          <li>Ask what they are doing: <b>Kei te aha koe?</b></li>
+          <li>Say goodbye: <b>Hei konā rā</b></li>
+        </ul>
+      </div>
+      <button class="restart-btn" style="margin-top:1.5rem" onclick="renderFriIntro()">↩ Play again</button>
+    </div>
+  `
+}
+</script>
+<script src="term1-data.js"></script>
+<script src="term2-data.js"></script>
+<script src="term3-data.js"></script>
+<script src="term4-data.js"></script>
+</body>
+</html>
