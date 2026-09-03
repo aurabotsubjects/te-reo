@@ -395,6 +395,22 @@ body{
 .lp-cols3 h4{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.35rem;color:#4c3a78}
 .lp-quiz-table td{font-size:.8rem}
 .lp-quiz-correct{font-weight:700;color:#1a7a4c}
+.ws-sheet .ws-head{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;border-bottom:2px solid #4c3a78;padding-bottom:.5rem;margin-bottom:.9rem}
+.ws-namebar{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;font-size:.85rem;margin-bottom:1rem}
+.ws-namebar span{border-bottom:1px solid #999;padding-bottom:.15rem}
+.ws-intro{font-size:.83rem;font-style:italic;color:#444;margin-bottom:.6rem}
+.ws-line{margin-bottom:.55rem;page-break-inside:avoid}
+.ws-line .ws-speaker{font-weight:700;color:#4c3a78;font-size:.8rem;letter-spacing:.03em}
+.ws-line .ws-te-reo{font-size:.95rem;margin:.05rem 0 .3rem}
+.ws-write{border-bottom:1px dotted #999;height:1.05rem}
+.ws-vocab{width:100%;border-collapse:collapse;font-size:.88rem}
+.ws-vocab th,.ws-vocab td{border:1px solid #bbb;padding:.5rem .6rem;text-align:left;color:#1a1a1a}
+.ws-vocab th{background:#f2f0f7;font-weight:700;color:#1a1a1a}
+.ws-vocab td.ws-kupu{font-weight:700;width:38%;color:#3d2a63}
+.ws-vocab td.ws-blank{height:1.9rem}
+.ws-blanklines div{border-bottom:1px dotted #999;height:1.35rem}
+.ws-note{font-size:.78rem;color:#666;margin-top:.35rem;font-style:italic}
+.ws-sheet .lp-section-title{background:#ece9f5;color:#3d2a63;border-left:4px solid #4c3a78}
 @media print{
   body *{visibility:hidden}
   .lp-overlay,.lp-overlay *{visibility:visible}
@@ -402,6 +418,8 @@ body{
   .lp-modal{box-shadow:none;border-radius:0;max-width:100%}
   .lp-toolbar{display:none}
   .lp-sheet{padding:0}
+  body{background:#fff !important;background-image:none !important}
+  .ws-page-break{page-break-before:always}
 }
 
 /* ── Footer ── */
@@ -636,6 +654,7 @@ function renderLesson(area, lesson, day){
         <span class="badge badge-muted">${focus}</span>
         <span class="term-week">Term ${currentTerm} · Week ${currentWeek}</span>
         <button class="lp-trigger" onclick="openLessonPlan('${day}')">📄 Lesson plan</button>
+        ${day==='Thursday' ? `<button class="lp-trigger" onclick="openDialogueWorksheet()">✏️ Dialogue worksheet</button>` : ''}
       </div>
       <h1 class="lesson-topic">${lesson.topic}</h1>
       <p class="nz-link">🎓 <span><strong>NZ Curriculum:</strong> Te Aho Arataki Marau — Levels 1–2</span></p>
@@ -1027,6 +1046,11 @@ function openLessonPlan(day){
     : buildLessonPlanHTML(term, week, day, data.curriculum[day])
   if(!html) return
 
+  openPrintOverlay('📄 Printable Lesson Plan', html)
+}
+
+// Shared printable overlay used by the lesson plan and the dialogue worksheet.
+function openPrintOverlay(title, html, extraClass){
   let ov = document.getElementById('lp-overlay')
   if(!ov){
     ov = document.createElement('div')
@@ -1037,11 +1061,11 @@ function openLessonPlan(day){
   ov.innerHTML = `
     <div class="lp-modal" onclick="event.stopPropagation()">
       <div class="lp-toolbar">
-        <span class="lp-title">📄 Printable Lesson Plan</span>
+        <span class="lp-title">${title}</span>
         <button class="lp-btn lp-print" onclick="window.print()">🖨 Print</button>
         <button class="lp-btn" onclick="closeLessonPlan()">✕ Close</button>
       </div>
-      <div class="lp-sheet">${html}</div>
+      <div class="lp-sheet ${extraClass||''}">${html}</div>
     </div>
   `
   ov.style.display = 'flex'
@@ -1145,6 +1169,139 @@ function buildLessonPlanHTML(term, week, day, lesson){
       <tr><th>General notes</th><td class="lp-fill">&nbsp;</td></tr>
     </table>
   `
+}
+
+// ── Thursday dialogue worksheet ─────────────────────────────────────────────
+// Pulls "<b>kupu</b> — meaning" / "<b>kupu</b> = meaning" pairs out of the
+// I Do demo block so they can be listed as vocabulary for students to define.
+function extractWorksheetVocab(lesson){
+  const out = [], seen = {}
+  const push = (t, m) => {
+    t = stripTags(t)
+      .replace(/^(new\s+(phrase|word|words|kupu)s?\s*:\s*)/i,'')
+      .replace(/^[A-Za-zĀĒĪŌŪāēīōū]{1,12}\s*:\s*/,'')   // strip speaker labels e.g. "B:"
+      .replace(/^[•\-]\s*/,'').trim()
+    m = stripTags(m).trim()
+    if(!t || !m || t.length > 60 || t.split(/\s+/).length > 7) return
+    const k = t.toLowerCase()
+    if(seen[k]) return
+    seen[k] = 1
+    out.push({term:t, meaning:m})
+  }
+  const demo = (lesson.iDo && lesson.iDo.demo) || ''
+  demo.split(/\n|<br\s*\/?>/i).forEach(line=>{
+    const raw = line.trim()
+    if(!raw || !/<b>/i.test(raw)) return
+    let sep = raw.includes('—') ? '—' : (raw.includes('=') ? '=' : null)
+    if(!sep) return
+    const idx = raw.indexOf(sep)
+    push(raw.slice(0, idx), raw.slice(idx + sep.length))
+  })
+  if(out.length < 4) extractKeyLanguage(lesson.iDo && lesson.iDo.example).forEach(v=>push(v.term, v.meaning))
+  // Fallback / top-up: the highlighted kupu in the dialogue (Te Aka dictionary links)
+  if(out.length < 4){
+    const ex = (lesson.iDo && lesson.iDo.example) || ''
+    const re = /<a[^>]*class="te-aka-link"[^>]*>([\s\S]*?)<\/a>/gi
+    let m
+    while((m = re.exec(ex))) push(m[1], '—')
+  }
+  // Last resort: the bolded target phrases in the demo / practice steps
+  if(out.length < 4){
+    const pools = [demo]
+      .concat((lesson.weDo && lesson.weDo.sentences) || [])
+      .concat((lesson.youDo && lesson.youDo.tasks) || [])
+    pools.forEach(chunk=>{
+      const re = /<b>([\s\S]*?)<\/b>/gi
+      let m
+      while((m = re.exec(chunk||''))){
+        const t = stripTags(m[1])
+        if(/^(AO|✓|Grammar|Task|Step|Part|Bonus|Notice|Tip|New)\b/i.test(t) || /:\s*$/.test(t)) continue
+        push(t, '—')
+      }
+    })
+  }
+  return out.slice(0, 16)
+}
+
+// Splits the I Do example dialogue into {speaker, text} lines.
+function extractDialogueLines(exampleHtml){
+  if(!exampleHtml) return []
+  return exampleHtml.split(/<br\s*\/?>/i).map(line=>{
+    const raw = line.trim()
+    if(!raw) return null
+    const m = raw.match(/^\s*<b>([\s\S]*?)<\/b>\s*([\s\S]*)$/i)
+    if(m && /:\s*$/.test(stripTags(m[1]))){
+      return {speaker: stripTags(m[1]).replace(/:\s*$/,''), text: stripTags(m[2])}
+    }
+    const t = stripTags(raw)
+    if(!t) return null
+    const c = t.indexOf(':')
+    if(c > 0 && c < 30) return {speaker: t.slice(0,c).trim(), text: t.slice(c+1).trim()}
+    return {speaker:'', text:t}
+  }).filter(Boolean)
+}
+
+function buildDialogueWorksheetHTML(term, week, lesson){
+  if(!lesson || !lesson.iDo) return null
+  const lines = extractDialogueLines(lesson.iDo.example)
+  const vocab = extractWorksheetVocab(lesson)
+  if(!lines.length && !vocab.length) return null
+
+  const dialogueRows = lines.map(l=>`
+    <div class="ws-line">
+      ${l.speaker ? `<div class="ws-speaker">${l.speaker}</div>` : ''}
+      <div class="ws-te-reo">${l.text}</div>
+      <div class="ws-write"></div>
+    </div>`).join('')
+
+  const vocabRows = vocab.map(v=>`
+    <tr><td class="ws-kupu">${v.term}</td><td class="ws-blank"></td></tr>`).join('')
+    // A few empty rows so students can add kupu hou they spot themselves
+    + Array.from({length: Math.max(3, 8 - vocab.length)}).map(()=>`
+    <tr><td class="ws-kupu ws-blank"></td><td class="ws-blank"></td></tr>`).join('')
+
+  const blankLines = n => `<div class="ws-blanklines">${Array.from({length:n}).map(()=>'<div></div>').join('')}</div>`
+
+  return `
+    <div class="ws-head">
+      <div>
+        <h1>Kōrero Worksheet — ${lesson.topic}</h1>
+        <div class="lp-sub">Te Reo Māori · Term ${term} · Week ${week} · Thursday</div>
+      </div>
+      <div style="font-size:.8rem;text-align:right;color:#555">Years 5–6<br>Kōrero — conversation</div>
+    </div>
+    <div class="ws-namebar">
+      <span><b>Ingoa / Name:</b> &nbsp;</span>
+      <span><b>Rā / Date:</b> &nbsp;</span>
+    </div>
+
+    ${lines.length ? `
+    <div class="lp-section-title">Part 1 — Te Kōrero / The dialogue</div>
+    <p class="ws-intro">Read the conversation with your partner. On the line under each sentence, write what you think it means in English.</p>
+    ${dialogueRows}` : ''}
+
+    ${vocab.length ? `
+    <div class="lp-section-title">Part 2 — Ngā Kupu Hou / Vocabulary</div>
+    <p class="ws-intro">Write the meaning of each kupu. Use the dialogue above to work it out first. Add any other new kupu you spot in the blank rows.</p>
+    <table class="ws-vocab">
+      <tr><th>Kupu / Word or phrase</th><th>Meaning in English</th></tr>
+      ${vocabRows}
+    </table>` : ''}
+
+    <div class="lp-section-title">Part 3 — Māu Anō / Your turn</div>
+    <p class="ws-intro">Write your own short conversation using the kupu above. Try for at least six lines.</p>
+    ${blankLines(12)}
+    <div class="ws-note">Kia kaha! Practise your conversation out loud with a partner before you write it down.</div>
+  `
+}
+
+function openDialogueWorksheet(){
+  const term = currentTerm, week = currentWeek
+  const data = _getTermData()
+  if(!data || !data.curriculum) return
+  const html = buildDialogueWorksheetHTML(term, week, data.curriculum.Thursday)
+  if(!html){ return }
+  openPrintOverlay('✏️ Printable Dialogue Worksheet', html, 'ws-sheet')
 }
 
 function buildFridayPlanHTML(term, week, quiz){
